@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Neo — From Fafankie</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --ink:#3b2430; --rose:#d8899b; --cream:#fff8f5; --pink:#f7d9df;
+  --deep:#24151e; --white:#fffdfc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream); color:var(--ink); font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3,.script{font-family:"Cormorant Garamond",serif}
+section{min-height:100vh; padding:100px 7vw; display:flex; align-items:center; justify-content:center; position:relative}
+.container{max-width:900px;width:100%;text-align:center}
+.eyebrow{text-transform:uppercase;letter-spacing:4px;font-size:11px;color:#806c93;margin-bottom:22px}
+h1{font-size:clamp(64px,12vw,140px);line-height:.8;font-weight:600}
+h2{font-size:clamp(42px,7vw,76px);line-height:.95;margin-bottom:28px}
+p{font-size:17px;line-height:1.9;max-width:680px;margin:0 auto;color:#624b55}
+button,.btn{
+  border:0; background:var(--ink); color:white; padding:15px 28px; border-radius:999px;
+  font:500 14px Inter; cursor:pointer; text-decoration:none; display:inline-block;
+  transition:.25s; box-shadow:0 10px 30px #3b243020;
+}
+button:hover,.btn:hover{transform:translateY(-3px);box-shadow:0 15px 35px #3b243030}
+.hero{min-height:100vh;background:radial-gradient(circle at 50% 35%,#ffffff,#eee7f8 55%,#d9c9ea)}
+.hero:before{content:"✿ 𑁍";}.hero:after{content:"𑁍 ✿";}.hero:before,.hero:after{position:absolute;color:#fff8;font-size:95px;animation:float 7s ease-in-out infinite}
+.hero:before{left:7%;top:16%}.hero:after{right:8%;bottom:15%;animation-delay:2s}
+.hero h1 span{display:block;color:#80659e;font-style:italic}
+.sub{margin:35px auto 40px}
+.scroll{position:absolute;bottom:30px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#806c93}
+.card{
+  background:#fff; padding:50px; border-radius:28px; box-shadow:0 25px 70px #63374712;
+  border:1px solid #ded2eb; text-align:left; margin:25px auto; max-width:760px;
+}
+.memory{background:#fff}
+.memory:nth-of-type(even){background:#f4effa}
+.memory .card{text-align:center}
+.number{font:600 18px "Cormorant Garamond";color:#8b70a8;margin-bottom:14px}
+.poem{
+  background:#fcfaff; border:1px solid #ddd1e9; padding:45px 35px; margin-top:30px;
+  font-family:"Cormorant Garamond",serif;font-size:24px;line-height:1.65;font-style:italic;
+  box-shadow:inset 0 0 40px #76558c10;
+}
+.photo{
+  width:100%; height:280px; border-radius:20px; margin-bottom:30px;
+  background:linear-gradient(135deg,#e5d9f1,#fcfaff,#d5c3e7);
+  display:flex;align-items:center;justify-content:center;color:#806c93;
+  letter-spacing:2px;text-transform:uppercase;font-size:11px;
+}
+.voice{background:#2b2238;color:white}
+.voice p{color:#e5deee}.voice .eyebrow{color:#cbb8df}
+.voice h2{color:white}
+.quote{font-size:clamp(25px,4vw,42px);font-family:"Cormorant Garamond";font-style:italic;margin:35px auto;line-height:1.2;color:#fff}
+.reveal{background:linear-gradient(180deg,#faf7ff,#e4d8f0)}
+.love{background:#2b2238;color:white}
+.love p{color:#e5deee}
+.biglove{font-size:clamp(70px,14vw,160px);color:#c9a9e4;font-style:italic;margin:25px 0}
+.final{background:radial-gradient(circle at center,#f7f1fc,#d7c6e9);min-height:100vh}
+.final h2{font-size:clamp(50px,8vw,100px)}
+.yes{background:#80609e;font-size:17px;padding:18px 42px}
+.heart{position:fixed;bottom:-30px;font-size:20px;pointer-events:none;animation:rise 5s linear forwards;z-index:5}
+.footer{padding:25px;text-align:center;font-size:11px;letter-spacing:2px;color:#806c93;background:#fff}
+@keyframes float{50%{transform:translateY(-20px) rotate(5deg)}}
+@keyframes rise{to{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+@media(max-width:600px){
+ section{padding:75px 6vw}.card{padding:30px 22px}.poem{padding:30px 20px;font-size:21px}
+ .photo{height:210px}
+}
+
+.florals{margin-top:34px;font-size:30px;letter-spacing:12px;color:#a78bc2}
+.florals span{display:inline-block;animation:sway 4s ease-in-out infinite}
+.florals span:nth-child(2){animation-delay:.7s}.florals span:nth-child(3){animation-delay:1.4s}
+@keyframes sway{50%{transform:translateY(-5px) rotate(4deg)}}
+
+/* DREAMY SLIDESHOW */
+body{overflow:hidden}
+.slide{
+  position:absolute; inset:0; min-height:100vh; padding:70px 7vw;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transform:scale(1.035) translateY(25px);
+  transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1.25s cubic-bezier(.22,1,.36,1), visibility 1s;
+  overflow-y:auto;
+}
+.slide.active{opacity:1;visibility:visible;transform:scale(1) translateY(0);z-index:2}
+.slide.exit{opacity:0;transform:scale(.96) translateY(-20px);z-index:1}
+.slide .container{transform:translateY(20px);opacity:0;transition:transform 1s .15s cubic-bezier(.22,1,.36,1),opacity 1s .15s}
+.slide.active .container{transform:translateY(0);opacity:1}
+.slide:nth-child(even) .container{transition-delay:.22s}
+.dots{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  display:flex;gap:9px;z-index:20;padding:10px 15px;border-radius:30px;
+  background:#ffffffa8;backdrop-filter:blur(12px);border:1px solid #ffffff;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#bca8cf;cursor:pointer;transition:.35s}
+.dot.active{width:24px;border-radius:10px;background:#80609e}
+.nav{
+  position:fixed;right:25px;bottom:22px;z-index:20;display:flex;gap:8px
+}
+.nav button{width:42px;height:42px;padding:0;background:#ffffffc9;color:#604978;border:1px solid #fff;backdrop-filter:blur(10px)}
+.nav button:hover{background:#fff}
+.progress{
+ position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#a98ac3,#d8bde9,#a98ac3);
+ z-index:30;transition:width .7s ease
+}
+.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff;opacity:.7;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.15;transform:scale(.5)}}
+.halo{position:absolute;width:45vw;height:45vw;border-radius:50%;background:#fff6;filter:blur(30px);pointer-events:none}
+</style>
+
+<style id="beautiful-final-animation">
+.final-actions{position:relative;z-index:5}
+.final-actions button{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease}
+.final-actions .yes:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 18px 45px rgba(130,91,165,.32)}
+.final-actions .obviously{animation:softPulse 2.4s ease-in-out infinite}
+@keyframes softPulse{0%,100%{box-shadow:0 8px 24px rgba(130,91,165,.15)}50%{box-shadow:0 12px 38px rgba(130,91,165,.34)}}
+
+#celebration{position:fixed;inset:0;z-index:999;pointer-events:none;overflow:hidden}
+.magic-petal,.magic-heart,.magic-star{
+  position:absolute;left:50%;top:55%;
+  opacity:0;animation:magicFloat 2.8s cubic-bezier(.18,.75,.25,1) forwards;
+}
+.magic-petal{font-size:22px}
+.magic-heart{font-size:25px}
+.magic-star{font-size:18px}
+@keyframes magicFloat{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0deg)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.15) rotate(var(--r))}
+}
+.final-glow{
+  animation:finalGlow 1.8s ease-in-out infinite alternate;
+}
+@keyframes finalGlow{
+  from{filter:drop-shadow(0 0 0 rgba(184,143,215,0))}
+  to{filter:drop-shadow(0 0 24px rgba(184,143,215,.45))}
+}
+.celebration-message{
+  animation:messageReveal 1s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes messageReveal{
+  from{opacity:0;transform:translateY(18px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+</style>
+
+
+<style id="proposal-beauty">
+.final-actions{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+.proposal-btn{
+  border:0;
+  border-radius:999px;
+  padding:15px 28px;
+  font:700 1rem/1 inherit;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#8f6aa8,#b88fd7);
+  box-shadow:0 10px 30px rgba(109,75,133,.22);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.proposal-btn:hover{
+  transform:translateY(-5px) scale(1.04);
+  box-shadow:0 18px 42px rgba(109,75,133,.32);
+}
+.obvious-btn{
+  background:linear-gradient(135deg,#a979b7,#d29acb);
+  animation:proposalPulse 2.3s ease-in-out infinite;
+}
+@keyframes proposalPulse{
+  0%,100%{box-shadow:0 10px 30px rgba(109,75,133,.18)}
+  50%{box-shadow:0 14px 42px rgba(190,126,190,.38)}
+}
+.answer{
+  display:none;
+  margin:28px auto 0;
+  max-width:620px;
+  padding:24px;
+  border-radius:28px;
+  background:rgba(255,255,255,.32);
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:0 20px 60px rgba(109,75,133,.16);
+  animation:answerReveal 1s cubic-bezier(.2,.8,.2,1) both;
+}
+.answer h3{margin:0 0 8px;font-size:1.35rem}
+.answer p{margin:0}
+.answer-sparkle{font-size:2rem;margin-bottom:6px;animation:sparkleSpin 2s ease-in-out infinite}
+@keyframes answerReveal{
+  from{opacity:0;transform:translateY(20px) scale(.94)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes sparkleSpin{
+  0%,100%{transform:scale(.9) rotate(0deg)}
+  50%{transform:scale(1.2) rotate(15deg)}
+}
+.proposal-particle{
+  position:fixed;
+  left:50%;
+  top:58%;
+  z-index:9999;
+  pointer-events:none;
+  font-size:22px;
+  animation:proposalBurst 3.2s cubic-bezier(.15,.75,.25,1) forwards;
+}
+@keyframes proposalBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.2) rotate(var(--r))}
+}
+</style>
+
+</head>
+<body>
+<div id="celebration"></div>
+
+<section class="slide hero active">
+  <div class="stars"></div><div class="halo"></div><div class="container">
+    <div class="eyebrow">A little something from Fafankie</div>
+    <h1>For <span>Neo</span></h1>
+    <p class="sub">Also known as Ms Masengi…<br>There are a few things I've been meaning to tell you.</p>
+    <button class="btn" onclick="nextSlide()">Start the story ♡</button>
+  </div>
+  <div class="florals"><span>𑁍</span><span>✿</span><span>𑁍</span></div><div class="scroll">click or use the arrows ↓</div>
+</section>
+
+<section id="begin" class="slide memory">
+  <div class="container">
+    <div class="eyebrow">01 · The beginning</div><div class="florals"><span>𑁍</span><span>✿</span><span>𑁍</span></div>
+    <h2><i>Your</i> the girl,<i>your</i> the one.</h2>
+    <div class="card">
+      <div class="photo"><video width ="600" height="280" autoplay muted playsinline controls><source src="neovid1.mp4" type="video/mp4"></video></div>
+      <p>When I first saw you at Mr and Ms i couldn't stop thinking to myself about how pretty you are and about the fact the someone like you actually exists in this wold,like i felt my stomach do a little flip and my heart started racing,like the very sight of you made my world spin around... </p>
+    </div>
+  </div>
+</section>
+
+<section class="slide memory">
+  <div class="container"><br>
+    <div class="eyebrow">02 · Words for you</div>
+    <h2>First poem I wrote about <i>You</i>.</h2>
+    <div class="card">
+      <p>
+      <div class="poem">“><b>Neo</b><br>
+Neo,
+you are the kind of beautiful
+that makes the moon seem unfinished,
+like even the stars grew jealous
+when you walked beneath them.
+Your eyes hold quiet galazies,
+your simle turns ordinary moments 
+into memories I never want to lose,
+and your voice-
+I swear,it feels like home
+in a world that never stays still.
+But it isn't only you beauty
+that makes <b><i>me love you</i></b>.
+It's the way your soul shines
+through everything you do,
+the way you make my heart feel 
+like it finally found what it's been searching for.
+And if beauty ever needed a name 
+I know it would whisper yours-
+<b><i>Neo</i></b>…”</div></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide memory">
+  <div class="container">
+    <div class="eyebrow">03 · A little moment</div>
+    <h2>The first time we held hands.</h2>
+    <div class="card">
+      <div class="photo"><img src ="neo 3.png" width="600" height="250"></div>
+      <p>I remember the night we held hands for the first time like it was an hour ago,the way I was so nervous and how I probably looked like a geek ,I wouldn't change a thing, like how you hand fit so perfectly in mine and how your touch felt so  divine ,I wish i could have just stayed in that moment forever...</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide memory">
+  <div class="container">
+    <div class="eyebrow">04 · Your eyes</div><br>
+    <h2>The first time I looked into your eyes.</h2>
+    <div class="card">
+      <p>I also remeber the first time I looked into your eyes properly,the way the sun shined into your eyes I couldn't stop staring into them,they're perfect.<br>From afar they look a bit darker and almost dark brown,but when you really get close and pay a little more attention,they are this perfect blend of honey brown and a darker hue,<br>and they only look so beautiful because they are on you<br>
+They're <i>Perfect</i><br>
+You're <i>Perfect</i></p>
+      
+  </div>
+</section>
+
+<section class="slide voice">
+  <div class="container">
+    <div class="eyebrow">05 · Your voice</div>
+    <h2>There is something about your voice.</h2>
+    <p>There's something special about your voice,
+I can't quite explain it 
+Like somehow a few simple words
+Can quiet all the noise in my head.
+I could hear you talk for hours,
+about nothing,about evertything too,
+And somehow every little sentence
+Feels better When it comes from you.
+Your laugh has its own kind if magic,
+A sound I could never replace,
+And when you say my name,
+I swear the whole world slows its pace.
+Sometimes I don't even need answers,
+I don't need a reason or clue-
+I just want to sit there and listen,
+Because I <i>Love</i> the sound of you</p>
+    <div class="quote">“I could listen to you for a Thousend years and the feeling wouldn't change.”</div>
+  </div>
+</section>
+
+<section class="slide reveal">
+  <div class="container">
+    <div class="eyebrow">06 · The thing I've been carrying</div>
+    <h2>I've wanted to say this for a while.</h2>
+    <div class="card">
+      <p>Well for one I've been feeling this way about you for a while and it's more than just a like feeling,the way my heart goes heyy its her and the way my tummy does a lil flip when i see you, the way your presence just makes eveything better already and how my world stops spinnig when I'm not with you.The feeling is more than just a like and idk how many times I've almost told you that... </p>
+      <br>
+      <p><strong></strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide love">
+  <div class="container">
+    <div class="eyebrow">07 · Finally</div><div class="florals"><span>✿</span><span>𑁍</span><span>✿</span></div>
+    <h2>Neo, there is something I need you to know.</h2>
+    <div class="biglove">I love you.</div>
+    <p>[I've been holding it in for too long,their where times I almost said it and times where i wanted to say it so bad.To me the words "I LOVE YOU" are strong because the meaning of love to me can only be discribed as a promise,(<i>1 Corinthians 13:4-8</i>)<br>
+So I promise that I'll treat you as perfectly as this verse was written</p>
+  </div>
+</section>
+
+<section class="slide final">
+  <div class="stars"></div><div class="halo"></div><div class="container">
+    <div class="eyebrow">08 · One last question</div>
+    <div class="deep-quote">
+  <div class="quote-mark">“</div>
+  <p>Sometimes, a person enters your life so quietly that you don't realize they're becoming one of your favorite parts of it. Then one day, you look back and realize that the little moments, the laughs, the memories, and the way your heart feels around them have all been leading to one beautiful question.</p>
+  <p class="quote-highlight">If I could choose the person I want beside me as I keep making memories, writing new chapters, and discovering where this story takes us… would you let that person be me, Neo?</p>
+  <div class="quote-mark bottom">”</div>
+</div>
+<h2>Ms Masengi… May you be my girlfriend? ❤️</h2>
+      <p>And this is only the beginning of our story.</p>
+      <div class="final-actions">
+        <button class="proposal-btn yes-btn" onclick="yesClicked()">YES 💜</button>
+        <button class="proposal-btn obvious-btn" onclick="yesClicked()">OBVIOUSLY (don't have a choice) 🌸</button>
+      </div>
+      <div id="answer" class="answer">
+        <div class="answer-sparkle">✦</div>
+        <h3>Then this is where our story really begins. 💜</h3>
+        <p>You just made Fafankie the happiest boy in the world. 🥹</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="progress" id="progress"></div>
+<div class="dots" id="dots"></div>
+<div class="nav">
+  <button onclick="prevSlide()" aria-label="Previous slide">‹</button>
+  <button onclick="nextSlide()" aria-label="Next slide">›</button>
+</div>
+<div class="footer">Made with love · Fafankie → Neo, Ms Masengi · lilies & hibiscus ♡</div>
+
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0, moving=false;
+const dots=document.getElementById('dots'), progress=document.getElementById('progress');
+
+slides.forEach((_,i)=>{
+  const d=document.createElement('span');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dots.appendChild(d);
+});
+function update(){
+  slides.forEach((s,i)=>{
+    s.classList.toggle('active',i===current);
+    s.classList.toggle('exit',i!==current && i===current-1);
+  });
+  [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===current));
+  progress.style.width=((current+1)/slides.length*100)+'%';
+  if(current===slides.length-1) document.body.style.overflowY='auto';
+  else document.body.style.overflow='hidden';
+}
+function goTo(i){
+  if(moving || i<0 || i>=slides.length || i===current)return;
+  moving=true; current=i; update();
+  setTimeout(()=>moving=false,1100);
+}
+function nextSlide(){
+  if(current<slides.length-1) goTo(current+1);
+}
+function prevSlide(){
+  if(current>0) goTo(current-1);
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
+});
+let touchX=0;
+document.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].screenX-touchX;
+  if(Math.abs(dx)>50) dx<0?nextSlide():prevSlide();
+},{passive:true});
+
+// Magical floating stars on selected slides.
+document.querySelectorAll('.stars').forEach(box=>{
+  for(let i=0;i<28;i++){
+    const s=document.createElement('span'); s.className='star';
+    s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*3)+'s';
+    s.style.animationDuration=(2+Math.random()*3)+'s';
+    box.appendChild(s);
+  }
+});
+update();
+
+function yesClicked(){
+  const answer=document.getElementById('answer');
+  if(answer) answer.style.display='block';
+
+  const symbols=['💜','🌸','✦','♡','✨','✿','𑁍','♥','⋆'];
+  for(let i=0;i<75;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.className='proposal-particle';
+      p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      p.style.setProperty('--x',((Math.random()*180)-90)+'vw');
+      p.style.setProperty('--y',((-20-Math.random()*100))+'vh');
+      p.style.setProperty('--r',((Math.random()*720)-360)+'deg');
+      p.style.left=(20+Math.random()*60)+'%';
+      p.style.top=(48+Math.random()*18)+'%';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),3300);
+    },i*28);
+  }
+}
+</script>
+
+</body>
+</html>
